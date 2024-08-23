@@ -14,105 +14,128 @@
       <h1>Plant Watch</h1>
       <div class="canvas-container">
         <canvas id="moistureChart"></canvas>
-        <script>
-          const socket = io();
-
-          let chart;
-
-          const dataPoints = {
-            Spathiphyllum: [],
-            Philodendron: [],
-            Calethea: [],
-          };
-
-          const ctx = document.getElementById("moistureChart").getContext("2d");
-          new Chart(ctx, {
-            type: "line",
-            data: {
-              datasets: [
-                {
-                  label: "Spathiphyllum",
-                  data: dataPoints["Spathiphyllum"],
-                  borderColor: "red",
-                  fill: false,
-                },
-                {
-                  label: "Philodendron",
-                  data: dataPoints["Philodendron"],
-                  borderColor: "blue",
-                  fill: false,
-                },
-                {
-                  label: "Calethea",
-                  data: dataPoints["Calethea"],
-                  borderColor: "green",
-                  fill: false,
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: "bottom",
-                  labels: {
-                    font: {
-                      size: 18,
-                    },
-                  },
-                },
-                title: {
-                  display: true,
-                  text: "Real Time Soil Moisture Levels",
-                  font: {
-                    size: 25,
-                  },
-                },
-              },
-              scales: {
-                x: {
-                  type: "time",
-                  time: {
-                    unit: "hour",
-                  },
-                  display: true,
-                  scaleLabel: {
-                    display: true,
-                    labelString: "Time",
-                  },
-                },
-                y: {
-                  beginAtZero: true,
-                  max: 100,
-                  ticks: {
-                    callback: function (value) {
-                      return value + "%";
-                    },
-                  },
-                  display: true,
-                  scaleLabel: {
-                    display: true,
-                    labelString: "Moisture (%)",
-                  },
-                },
-              },
-            },
-          });
-
-          socket.on("newReading", function (reading) {
-            const { plant, value, time } = reading;
-            if (dataPoints[plant]) {
-              const newData = { x: time, y: value };
-              const dataset = chart.data.datasets.find(
-                (d) => d.label === plant
-              );
-              dataset.data.push(newData);
-              chart.update();
-            }
-          });
-        </script>
       </div>
     </div>
+    <script>
+      // establish a WebSocket connection to the server
+      const socket = io();
+      socket.on("connect", () => {
+        console.log("Connected to server");
+      });
+
+      let chart;
+
+      // object to store data points for each plant
+      const dataPoints = {
+        Spathiphyllum: [],
+        Philodendron: [],
+        Calethea: [],
+      };
+
+      // initialize the Chart.js chart
+      const ctx = document.getElementById("moistureChart").getContext("2d");
+      chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "Spathiphyllum",
+              data: dataPoints["Spathiphyllum"],
+              borderColor: "red",
+              fill: false,
+            },
+            {
+              label: "Philodendron",
+              data: dataPoints["Philodendron"],
+              borderColor: "blue",
+              fill: false,
+            },
+            {
+              label: "Calethea",
+              data: dataPoints["Calethea"],
+              borderColor: "green",
+              fill: false,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                font: {
+                  size: 18,
+                },
+              },
+            },
+            title: {
+              display: true,
+              text: "Real Time Soil Moisture Levels",
+              font: {
+                size: 25,
+              },
+            },
+          },
+          scales: {
+            x: {
+              type: "time",
+              time: {
+                unit: "minute",
+              },
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: "Time",
+              },
+            },
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                callback: function (value) {
+                  return value + "%"; // append percentage symbol to y-axis ticks
+                },
+              },
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: "Moisture (%)",
+              },
+            },
+          },
+        },
+      });
+
+      // listen for the initial data and update the chart
+      socket.on("initialData", function (data) {
+        // populate your chart with initial data
+        Object.keys(data).forEach((plant) => {
+          const dataset = chart.data.datasets.find((d) => d.label === plant);
+          dataset.data = data[plant];
+        });
+        chart.update(); // update the chart with the initial data
+      });
+
+      // listen for new readings
+      socket.on("newReading", function (reading) {
+        console.log("New reading received:", reading); // log new reading
+        const { plant, value, time } = reading;
+        if (dataPoints[plant]) {
+          const newData = { x: time, y: value };
+          const dataset = chart.data.datasets.find((d) => d.label === plant);
+          dataset.data.push(newData); // add new data point to dataset
+
+          // check if the dataset exceeds 100 readings and remove the oldest if necessary
+          if (dataset.data.length > 100) {
+            dataset.data.shift(); // remove the oldest reading
+          }
+
+          // update chart with new data
+          chart.update();
+        }
+      });
+    </script>
   </body>
 </html>
