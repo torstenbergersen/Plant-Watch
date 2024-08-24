@@ -70,9 +70,6 @@ io.on("connection", (socket) => {
   socket.emit("initialData", plantReadings);
 });
 
-const PORT = process.env.PORT || 3000;
-const HOST = "0.0.0.0"; // This binds the app to all network interfaces
-
-app.listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}`);
+server.listen(3000, () => {
+  console.log("server running at http://localhost:3000");
 });
