@@ -59,7 +59,7 @@
 
 2. Using the Ardruino IDE, verify and upload the code in esp32.ino to your Esp32.
 
-- Replace the ssid and password with your local network, and change the serverName to localhost:300/data.
+- Replace the ssid and password with your local network, and change the serverName to localhost:3000/data.
 - Change the plant name to your own
 
 ## Usage
