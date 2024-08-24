@@ -5,8 +5,9 @@ const path = require("path");
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
+const favicon = require("serve-favicon");
 
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "../public", "favicon.ico")));
 app.use(
   "/node_modules",
   express.static(path.join(__dirname, "../node_modules"))
