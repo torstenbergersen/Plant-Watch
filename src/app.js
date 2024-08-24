@@ -17,8 +17,8 @@ const plantReadings = {
 
 // convert analog value to percentage
 function convertToPercentage(analogValue) {
-  const minReading = 1490; // 100% moisture (fully submerged)
-  const maxReading = 3350; // 0% moisture (open air)
+  const minReading = 1500; // 100% moisture (fully submerged)
+  const maxReading = 3370; // 0% moisture (open air)
 
   // ensure the reading is within the expected range
   if (analogValue < minReading) analogValue = minReading;
@@ -70,6 +70,9 @@ io.on("connection", (socket) => {
   socket.emit("initialData", plantReadings);
 });
 
-server.listen(3000, () => {
-  console.log("server running at http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+const HOST = "0.0.0.0"; // This binds the app to all network interfaces
+
+app.listen(PORT, HOST, () => {
+  console.log(`Server running at http://${HOST}:${PORT}`);
 });
