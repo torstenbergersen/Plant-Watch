@@ -1,13 +1,73 @@
 # Plant Watch
 
-**See plant data here:** https://linux.plant-watch.com/
+**See my plant data here:** https://linux.plant-watch.com/
 
-**Plant Watch** is a Node.js application that monitors soil moisture levels for a few of my house plants. It receives sensor data every 30 minutes from ESP32 devices equipped with soil moisture sensors and displays the data using a chart powered by Chart.js. The chart holds the last 100 readings so that you can see the change in moisture over time. The app itself is hosted on my VPS with PM2 configured to keep it running and restarting upon failure. The inspiration behind this project was to introduce myself to Iot, working with linux, and self hosting applications. I have had a ton of fun and frustration getting it to work, and have a lot of plans to expand and optimize it going forward.
+**Plant Watch** is a smart plant monitoring system that keeps track of soil moisture levels for houseplants using ESP32 microcontrollers and soil moisture sensors. This project aims to explore IoT, microcontroller integration, and self-hosting solutions while providing a practical tool for plant care.
 
-## Esp32 set up
+## Features
 
-The setup of the microcontroller is pretty simple. All that I used was a breadboard power supply unit and soil moisture sensor. Going into the project I knew very little about working with microcontrollers like these and I had a ton of fun tinkering with them. I know there is a better way for these to be configured, and I am working on ideas to improve them. Their battery life is a point of weakness, and I am looking into other options.
+- Real-time soil moisture monitoring
+- Visual representation of moisture data over time (last 100 readings)
+- Responsive web interface for viewing data
+- Automatic data logging every 30 minutes
+- Self-hosted on a linux-based VPS with automatic restarts using PM2
 
-![ESP32 with sensor](images/moisture-sensor.jpeg)
+### Planned Features
+
+- Notifications for low moisture levels
+- Improved battery management for ESP32 devices
+- Integration with other sensors (e.g., temperature, humidity)
+- Enhanced data visualization (e.g., historical data analysis)
+- Sqlite for long-term data storage
 
 ![Calethea](images/plant.jpeg)
+
+## Installation & Setup
+
+### Prerequisites
+
+- Node.js and npm installed
+- ESP32 microcontrollers and soil moisture sensors
+
+### Steps
+
+## Server
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/plant-watch.git
+   cd plant-watch
+   ```
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the application:
+
+   ```bash
+   npm start
+   ```
+
+4. Access the application at `http://localhost:3000`.
+
+## Esp32
+
+1. Connected the ESP32 as shown in the photo
+   ![ESP32 with sensor](images/moisture-sensor.jpeg)
+
+2. Using the Ardruino IDE, verify and upload the code in esp32.ino to your Esp32.
+
+- Replace the ssid and password with your local network, and change the serverName to localhost:300/data.
+- Change the plant name to your own
+
+## Usage
+
+- Access the web interface at `http://localhost:3000` to view live moisture data.
+- The chart displays the last 100 moisture readings, updated every 30 minutes.
+- Future features will include notifications for when moisture levels fall below a certain threshold.
+
+## License
+
+This project is licensed under the MIT License.
