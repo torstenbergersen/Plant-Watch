@@ -44,13 +44,15 @@
    npm install
    ```
 
-3. Start the application:
+3. Delete API related code
+
+4. Start the application:
 
    ```bash
    npm start
    ```
 
-4. Access the application at `http://localhost:3000`.
+5. Access the application at `http://localhost:3000`.
 
 ## Esp32
 
@@ -60,7 +62,7 @@
 2. Using the Ardruino IDE, verify and upload the code in esp32.ino to your Esp32.
 
 - Replace the ssid and password with your local network, and change the serverName to localhost:3000/data.
-- Change the plant name to your own
+- Change the plant name to your own.
 
 ## Usage
 
