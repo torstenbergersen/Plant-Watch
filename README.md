@@ -56,7 +56,7 @@
 
 ## Esp32
 
-1. Connected the ESP32 as shown in the photo
+1. Connected the ESP32 to the sensor as shown in the photo.
    ![ESP32 with sensor](images/moisture-sensor.jpeg)
 
 2. Using the Ardruino IDE, verify and upload the code in esp32.ino to your Esp32.
