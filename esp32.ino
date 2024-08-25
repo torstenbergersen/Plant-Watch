@@ -5,8 +5,10 @@
 
 const char *ssid = "**";
 const char *password = "**";
-const char *serverName = "https://linux.plant-watch.com/data";
+const char *serverName = "**";
 const int moistureSensorPin = 36;
+
+// const char *apiKey =
 
 void setup()
 {
@@ -42,6 +44,7 @@ void loop()
         HTTPClient http;
         http.begin(serverName);
         http.addHeader("Content-Type", "application/json");
+        // http.addHeader("x-api-key", apiKey);
         int httpResponseCode = http.POST(jsonString);
 
         if (httpResponseCode > 0)

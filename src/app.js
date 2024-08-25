@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
@@ -15,6 +17,17 @@ app.use(
   "/node_modules",
   express.static(path.join(__dirname, "../node_modules"))
 );
+
+const API_KEY = process.env.API_KEY;
+
+// middleware to check for API key
+function checkApiKey(req, res, next) {
+  const apiKey = req.headers["x-api-key"];
+  if (apiKey !== API_KEY) {
+    return res.status(403).send("Forbidden: Invalid API Key");
+  }
+  next(); // proceed
+}
 
 // store last 100 plant readings
 const plantReadings = {
@@ -49,7 +62,7 @@ app.get("initialData", (req, res) => {
 });
 
 // handle new data received at /data
-app.post("/data", express.json(), (req, res) => {
+app.post("/data", checkApiKey, express.json(), (req, res) => {
   const { plant, moisture } = req.body;
   console.log("Data received from ESP32:", req.body);
 
