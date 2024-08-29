@@ -9,7 +9,7 @@
 - Real-time soil moisture monitoring
 - Visual representation of moisture data over time (last 100 readings)
 - Responsive web interface for viewing data
-- Automatic data logging every 60 minutes
+- Automatic data logging every 6 hours
 - Self-hosted on a linux-based VPS with automatic restarts using PM2
 
 ### Planned Features
@@ -56,7 +56,7 @@
 
 ## Esp32
 
-1. Connected the ESP32 to the sensor as shown in the photo.
+1. Connected the ESP32 to the sensor as shown in the photo. I have since switched to a more robust power supply, using lithium ion batteries.
    ![ESP32 with sensor](images/moisture-sensor.jpeg)
 
 2. Using the Ardruino IDE, verify and upload the code in esp32.ino to your Esp32.
@@ -67,7 +67,7 @@
 ## Usage
 
 - Access the web interface at `http://localhost:3000` to view live moisture data.
-- The chart displays the last 100 moisture readings, updated every 60 minutes.
+- The chart displays the last 100 moisture readings, updated every 6 hours.
 - Future features will include notifications for when moisture levels fall below a certain threshold.
 
 ## License
