@@ -8,11 +8,6 @@ const char *password = "**";
 const char *serverName = "**";
 const int moistureSensorPin = 36;
 
-// const char *apiKey =
-
-const int sleepCycleMinutes = 30; // Sleep for 30 minutes per cycle
-const int sleepCycles = 2;        // Number of cycles to accumulate to 60 minutes
-
 void setup()
 {
     Serial.begin(115200);
@@ -26,15 +21,18 @@ void setup()
 
     Serial.println("Connected to WiFi");
     delay(5000); // give the sensor some time to stabilize
+}
 
+void loop()
+{
     if (WiFi.status() == WL_CONNECTED)
     {
         // get sensor value
         int sensorValue = analogRead(moistureSensorPin);
 
-        // create the JSON object with the sensor value
+        // create the JSON object with the average sensor value
         DynamicJsonDocument doc(64);
-        doc["plant"] = "Spathiphyllum";
+        doc["plant"] = "Philodendron";
         doc["moisture"] = sensorValue;
 
         String jsonString;
@@ -56,29 +54,14 @@ void setup()
             Serial.printf("Error code: %d\n", httpResponseCode);
         }
 
-        // Print the response for debugging
-        String response = http.getString();
-        Serial.println("Response: " + response);
-
         http.end();
     }
     else
     {
         Serial.println("WiFi Disconnected");
     }
+    // put the ESP32 into deep sleep for 6 hours
+    esp_sleep_enable_timer_wakeup(6 * 60 * 60 * 1000000ULL); // Time in microseconds
 
-    for (int i = 0; i < sleepCycles; i++)
-    {
-        esp_sleep_enable_timer_wakeup(sleepCycleMinutes * 60 * 1000000ULL);
-        esp_deep_sleep_start();
-    }
-
-    // put the ESP32 into deep sleep for 60 minutes
-    // esp_sleep_enable_timer_wakeup(60 * 60 * 1000000);
-    // esp_deep_sleep_start();
-}
-
-void loop()
-{
-    // Intentionally left empty
+    esp_deep_sleep_start();
 }
