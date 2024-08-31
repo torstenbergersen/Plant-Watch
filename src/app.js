@@ -38,8 +38,8 @@ const plantReadings = {
 
 // convert analog value to percentage
 function convertToPercentage(analogValue) {
-  const minReading = 1840; // fully wet soil
-  const maxReading = 3220; // fully dry soil
+  const minReading = 1350; // fully wet soil
+  const maxReading = 2900; // fully dry soil
 
   // ensure the reading is within the expected range
   if (analogValue < minReading) analogValue = minReading;

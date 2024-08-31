@@ -60,8 +60,8 @@ void loop()
     {
         Serial.println("WiFi Disconnected");
     }
-    // put the ESP32 into deep sleep for 6 hours
-    esp_sleep_enable_timer_wakeup(6 * 60 * 60 * 1000000ULL); // Time in microseconds
+    // put the ESP32 into deep sleep for 1 hour
+    esp_sleep_enable_timer_wakeup(60 * 60 * 1000000ULL); // time in microseconds
 
     esp_deep_sleep_start();
 }
