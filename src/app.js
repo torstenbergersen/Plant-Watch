@@ -47,10 +47,11 @@ function convertToPercentage(analogValue) {
 
   // calculate moisture percentage
   const moisturePercentage =
-    ((analogValue - maxReading) / (minReading - maxReading)) * 100;
+    ((maxReading - analogValue) / (maxReading - minReading)) * 100;
 
   return moisturePercentage;
 }
+
 // serve webpage
 app.get("/", (req, res) => {
   res.sendFile(join(__dirname, "../public/index.html"));
