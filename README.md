@@ -56,8 +56,7 @@
 
 ## Esp32
 
-1. Connected the ESP32 to the sensor as shown in the photo. I have since switched to a more robust power supply, using lithium ion batteries.
-   ![ESP32 with sensor](images/moisture-sensor.jpeg)
+1. Connected the ESP32 to a 3.7v lithium battery via the VIN and GND pins. Connect the moisture sensor via the GPIO15, GND, and 3V3 pins.
 
 2. Using the Ardruino IDE, verify and upload the code in esp32.ino to your Esp32.
 
