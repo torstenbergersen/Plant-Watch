@@ -129,7 +129,7 @@
           dataset.data.push(newData); // add new data point to dataset
 
           // check if the dataset exceeds 100 readings and remove the oldest if necessary
-          if (dataset.data.length > 100) {
+          if (dataset.data.length > 200) {
             dataset.data.shift(); // remove the oldest reading
           }
 

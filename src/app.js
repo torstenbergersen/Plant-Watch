@@ -72,8 +72,8 @@ app.post("/data", checkApiKey, express.json(), (req, res) => {
     const currentTime = new Date().toISOString();
     console.log("Converted to percentage:", percentageValue);
 
-    // ensure only the last 100 readings stored
-    if (plantReadings[plant].length >= 100) {
+    // ensure only the last 200 readings stored
+    if (plantReadings[plant].length >= 200) {
       plantReadings[plant].shift(); // remove the oldest reading
     }
     plantReadings[plant].push({ x: currentTime, y: percentageValue });
