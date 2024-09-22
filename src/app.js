@@ -39,7 +39,7 @@ const plantReadings = {
 // convert analog value to percentage
 function convertToPercentage(analogValue) {
   const minReading = 1250; // fully wet soil
-  const maxReading = 2900; // fully dry soil
+  const maxReading = 2500; // fully dry soil
 
   // ensure the reading is within the expected range
   if (analogValue < minReading) analogValue = minReading;
@@ -73,7 +73,7 @@ app.post("/data", checkApiKey, express.json(), (req, res) => {
     console.log("Converted to percentage:", percentageValue);
 
     // ensure only the last 200 readings stored
-    if (plantReadings[plant].length >= 200) {
+    if (plantReadings[plant].length >= 100) {
       plantReadings[plant].shift(); // remove the oldest reading
     }
     plantReadings[plant].push({ x: currentTime, y: percentageValue });
