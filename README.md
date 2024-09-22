@@ -1,7 +1,12 @@
 # Plant Watch
 
 **See my plant data here:** https://linux.plant-watch.com/
-- You'll notice a lot of jumping around on the chart. I am not sure if these have to do with my battery issues, or if the sensors are acting incorrectly. Interestingly, philodendron seems to be operating as it should despite having the same setup. I have been testing to diagnose the problem.
+
+### Notes
+
+- I have changed the sensors to a 6 hour schedule to help prolong battery life and provide a more reasonable tracking of moisture data
+- Optimized the ESP32 code to be more battery efficient
+- Changed back to keeping only the last 100 readings for a cleaner chart
 
 **Plant Watch** is a smart plant monitoring system that keeps track of soil moisture levels for houseplants using ESP32 microcontrollers and soil moisture sensors. This project aims to explore IoT, microcontroller integration, and self-hosting solutions while providing a practical tool for plant care.
 
@@ -10,7 +15,7 @@
 - Real-time soil moisture monitoring
 - Visual representation of moisture data over time (last 100 readings)
 - Responsive web interface for viewing data
-- Automatic data logging every hour
+- Automatic data logging every 6 hours
 - Self-hosted on a linux-based VPS with automatic restarts using PM2
 
 ### Planned Features
@@ -67,7 +72,7 @@
 ## Usage
 
 - Access the web interface at `http://localhost:3000` to view live moisture data.
-- The chart displays the last 100 moisture readings, updated every hour.
+- The chart displays the last 100 moisture readings, updated every 6 hours.
 - Future features will include notifications for when moisture levels fall below a certain threshold.
 
 ## License
