@@ -1,9 +1,9 @@
 # Plant Watch
 
 **See my plant data here:** https://linux.plant-watch.com/
-
+- server reloaded on 09/22/24
+  
 ### Notes
-
 - I have changed the sensors to a 6 hour schedule to help prolong battery life and provide a more reasonable tracking of moisture data
 - Optimized the ESP32 code to be more battery efficient
 - Changed back to keeping only the last 100 readings for a cleaner chart
