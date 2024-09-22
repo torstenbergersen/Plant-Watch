@@ -13,7 +13,7 @@ const char *apiKey = "**";
 
 void setup()
 {
-    Serial.begin(115200);
+    // Serial.begin(115200);
 
     // Initialize sensor power control pin
     pinMode(sensorPowerPin, OUTPUT);
@@ -28,10 +28,10 @@ void setup()
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(1000);
-        Serial.println("Connecting to WiFi...");
+        // Serial.println("Connecting to WiFi...");
     }
-    Serial.println("Connected to WiFi");
-    delay(500); // give the sensor some time to stabilize
+    // Serial.println("Connected to WiFi");
+    delay(1000); // give the sensor some time to stabilize
 }
 
 void loop()
@@ -40,18 +40,18 @@ void loop()
     {
         // Power on the sensor
         digitalWrite(sensorPowerPin, HIGH);
-        delay(500); // Wait for sensor to stabilize
+        delay(1000); // second for sensor to stabilize
 
         // get sensor value
         int sensorValue = analogRead(moistureSensorPin);
-        Serial.printf("Moisture Level: %d\n", sensorValue);
+        // Serial.printf("Moisture Level: %d\n", sensorValue);
 
         // Turn off the sensor after reading
         digitalWrite(sensorPowerPin, LOW);
 
         // create the JSON object with the average sensor value
         DynamicJsonDocument doc(64);
-        doc["plant"] = "Spathiphyllum";
+        doc["plant"] = "Calethea";
         doc["moisture"] = sensorValue;
 
         String jsonString;
@@ -64,25 +64,22 @@ void loop()
         http.addHeader("x-api-key", apiKey);
         int httpResponseCode = http.POST(jsonString);
 
-        if (httpResponseCode > 0)
-        {
-            Serial.printf("HTTP Response code: %d\n", httpResponseCode);
-        }
-        else
-        {
-            Serial.printf("Error code: %d\n", httpResponseCode);
-        }
+        // if (httpResponseCode > 0) {
+        //   Serial.printf("HTTP Response code: %d\n", httpResponseCode);
+        // } else {
+        //   Serial.printf("Error code: %d\n", httpResponseCode);
+        // }
 
         http.end();
     }
     else
     {
-        Serial.println("WiFi Disconnected");
+        // Serial.println("WiFi Disconnected");
     }
     // Disconnect WiFi and prepare for deep sleep
     WiFi.disconnect(true);
     WiFi.mode(WIFI_OFF);
 
-    esp_sleep_enable_timer_wakeup(60 * 60 * 1000000ULL); // Sleep for 1 hour
+    esp_sleep_enable_timer_wakeup(6 * 60 * 60 * 1000000ULL); // Sleep for 6 hours
     esp_deep_sleep_start();
 }
