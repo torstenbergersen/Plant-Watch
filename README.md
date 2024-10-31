@@ -1,8 +1,10 @@
 # Plant Watch
 
 **See my plant data here:** https://linux.plant-watch.com/
-- server reloaded on 09/23/24
+- spathiphyllum is for some reason dying after an hour on a fresh battery. currently investigating
 - added esp_restart() to the setup function for the code on the Calethea module in an attempt to fix "stuck" sensor readings (10/10/24)
+   - this didnt really seem to affect much
+
 
 **Plant Watch** is a smart plant monitoring system that keeps track of soil moisture levels for houseplants using ESP32 microcontrollers and soil moisture sensors. This project aims to explore IoT, microcontroller integration, and self-hosting solutions while providing a practical tool for plant care.
 
