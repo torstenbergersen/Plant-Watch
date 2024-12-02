@@ -7,7 +7,7 @@
 
 ### Notes
 
-- A lot of the energy saving aspects of the ESP32 code are now moot as they have bee plugged into outlets
+- A lot of the energy saving aspects of the ESP32 code are no longer useful as they are no longer running on the lithium batteries. I dont, however, see any reason to change the code now.
 
 ## Features
 
