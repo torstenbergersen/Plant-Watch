@@ -72,6 +72,7 @@ app.get("initialData", (req, res) => {
 app.post("/data", checkApiKey, express.json(), (req, res) => {
     const { plant, moisture } = req.body;
     console.log("Data received from ESP32:", req.body);
+    console.log("Moisture value received:", moisture);
 
     if (plantReadings[plant]) {
         const percentageValue = convertToPercentage(moisture);
