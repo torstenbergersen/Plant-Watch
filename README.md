@@ -1,13 +1,8 @@
 # Plant Watch
 
 **See my plant data here:** https://linux.plant-watch.com/
-- down for maintenance
 
 **Plant Watch** is a smart plant monitoring system that keeps track of soil moisture levels for houseplants using ESP32 microcontrollers and soil moisture sensors. This project aims to explore IoT, microcontroller integration, and self-hosting solutions while providing a practical tool for plant care.
-
-### Notes
-
-- A lot of the energy saving aspects of the ESP32 code are no longer useful as they are no longer running on the lithium batteries. I dont, however, see any reason to change the code now.
 
 ## Features
 
