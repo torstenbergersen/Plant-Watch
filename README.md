@@ -9,7 +9,7 @@
 - Real-time soil moisture monitoring
 - Visual representation of moisture data over time (last 100 readings)
 - Responsive web interface for viewing data
-- Automatic data logging every 6 hours
+- Automatic data logging every 3 hours
 - Self-hosted on a linux-based VPS with automatic restarts using PM2
 
 ### Planned Features
