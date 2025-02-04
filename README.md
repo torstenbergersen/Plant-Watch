@@ -63,7 +63,7 @@
 ## Usage
 
 - Access the web interface at `http://localhost:3000` to view live moisture data.
-- The chart displays the last 100 moisture readings, updated every 6 hours.
+- The chart displays the last 100 moisture readings, updated every 3 hours.
 - Future features will include notifications for when moisture levels fall below a certain threshold.
 
 ## License
